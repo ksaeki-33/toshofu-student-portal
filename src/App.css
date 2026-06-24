@@ -379,3 +379,27 @@ td {
     flex-direction: column;
   }
 }
+
+/* スマホで文字を濃くする */
+@media (max-width: 600px) {
+  .login-title,
+  .page-title,
+  .stat-card h2 {
+    color: #0b2341;
+    font-weight: 800;
+  }
+
+  .login-text,
+  .page-subtitle,
+  .stat-card p,
+  .stat-card span,
+  .list-item p,
+  .task-item p,
+  .profile-card span {
+    color: #1f2937;
+  }
+
+  .gold-label {
+    color: #8a6415;
+  }
+}
