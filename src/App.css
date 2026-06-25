@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  background: #f4f6f9;
 }
 
 .app {
@@ -144,6 +145,11 @@ body {
   cursor: pointer;
 }
 
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 .lang-switch {
   margin-bottom: 20px;
   padding: 8px 14px;
@@ -195,6 +201,17 @@ body {
   min-width: 210px;
 }
 
+.badge {
+  width: fit-content;
+  background: #f7edcf;
+  color: #7a570f;
+  border: 1px solid #dcc17a;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -206,6 +223,10 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+
+.lower-grid {
+  margin-top: 24px;
 }
 
 .stat-card,
@@ -233,14 +254,21 @@ body {
 
 .panel {
   padding: 26px;
+  text-align: left;
+}
+
+.panel-copy {
+  color: #4b5563;
+  line-height: 1.7;
 }
 
 .list-item {
   display: flex;
   gap: 14px;
-  align-items: center;
+  align-items: flex-start;
   border-bottom: 1px solid #e5e7eb;
   padding: 14px 0;
+  text-align: left;
 }
 
 .date-box {
@@ -250,19 +278,50 @@ body {
   border-radius: 6px;
   text-align: center;
   font-weight: bold;
+  color: #0b2341;
 }
 
 .task-item {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 16px;
   border-bottom: 1px solid #e5e7eb;
   padding: 14px 0;
+  text-align: left;
+}
+
+.list-item strong,
+.task-item strong {
+  display: block;
+  color: #0b2341;
+  margin: 3px 0 5px;
+}
+
+.item-meta {
+  display: inline-block;
+  color: #8a6415;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.due-pill {
+  min-width: 118px;
+  background: #eef2f7;
+  border: 1px solid #dbe3ec;
+  border-radius: 8px;
+  color: #0b2341;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 8px 10px;
+  text-align: center;
 }
 
 .table-card {
   padding: 26px;
   overflow-x: auto;
+  text-align: left;
 }
 
 table {
@@ -280,6 +339,28 @@ th {
 td {
   padding: 14px;
   border-bottom: 1px solid #e5e7eb;
+}
+
+.status-message {
+  background: #fff8e6;
+  border: 1px solid #e1c36a;
+  border-radius: 8px;
+  color: #76560f;
+  font-weight: 700;
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.error-message {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #b91c1c;
+}
+
+.empty {
+  color: #6b7280;
+  padding: 14px 0;
 }
 
 /* タブレット */
@@ -377,6 +458,10 @@ td {
 
   .task-item {
     flex-direction: column;
+  }
+
+  .due-pill {
+    width: 100%;
   }
 }
 
