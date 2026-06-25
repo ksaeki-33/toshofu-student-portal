@@ -8,9 +8,9 @@ const text = {
     portal: "Student Portal",
     officialPortal: "Official Student Portal",
     signIn: "Sign In",
-    username: "User Name",
+    studentId: "Student ID",
     password: "Password",
-    loginError: "User name or password is incorrect.",
+    loginError: "Student ID or password is incorrect.",
     logout: "Logout",
     dashboard: "Dashboard",
     notices: "Notices",
@@ -60,9 +60,9 @@ const text = {
     portal: "学生ポータル",
     officialPortal: "公式学生ポータル",
     signIn: "ログイン",
-    username: "ユーザー名",
+    studentId: "学生番号",
     password: "パスワード",
-    loginError: "ユーザー名またはパスワードが正しくありません。",
+    loginError: "学生番号またはパスワードが正しくありません。",
     logout: "ログアウト",
     dashboard: "ダッシュボード",
     notices: "通知",
@@ -152,7 +152,7 @@ function App() {
       setResourceError("");
 
       try {
-        const query = `?lang=${lang}&userId=${currentUser.id}`;
+        const query = `?lang=${lang}&userId=${currentUser.studentId}`;
         const [notices, assignments, schedule, grades] = await Promise.all([
           apiFetch(`/notices${query}`),
           apiFetch(`/assignments${query}`),
@@ -241,7 +241,7 @@ function App() {
 }
 
 function Login({ lang, setLang, setCurrentUser }) {
-  const [name, setName] = useState("");
+  const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -254,10 +254,10 @@ function Login({ lang, setLang, setCurrentUser }) {
     try {
       const result = await apiFetch("/login", {
         method: "POST",
-        body: JSON.stringify({ name, password }),
+        body: JSON.stringify({ studentId, password }),
       });
 
-      setCurrentUser({ ...result.user, demoToken: result.demoToken });
+      setCurrentUser(result.student);
     } catch {
       setError(text[lang].loginError);
     } finally {
@@ -282,9 +282,9 @@ function Login({ lang, setLang, setCurrentUser }) {
 
         <input
           className="input"
-          placeholder={text[lang].username}
-          value={name}
-          onChange={(event) => setName(event.target.value)}
+          placeholder={text[lang].studentId}
+          value={studentId}
+          onChange={(event) => setStudentId(event.target.value)}
           autoComplete="username"
         />
         <input
@@ -316,9 +316,10 @@ function PageHeader({ lang, user, title, subtitle }) {
       </div>
       <div className="profile-card">
         <strong>{user.name}</strong>
-        <span>{user.id}</span>
-        <span>{user.role}</span>
-        <span>{user.program}</span>
+        <span>{user.studentId}</span>
+        {user.department && <span>{user.department}</span>}
+        {user.role && <span>{user.role}</span>}
+        {user.program && <span>{user.program}</span>}
         {user.isAdmin && <span className="badge">{text[lang].adminReady}</span>}
       </div>
     </header>
