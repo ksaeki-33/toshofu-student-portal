@@ -1,38 +1,10 @@
 const { app } = require("@azure/functions");
-const { CosmosClient } = require("@azure/cosmos");
-
-const databaseId = "tiu-db";
-const containerId = "students";
-
-let container;
-
-function getStudentsContainer() {
-  if (container) {
-    return container;
-  }
-
-  const connectionString = process.env.COSMOS_CONNECTION_STRING;
-
-  if (!connectionString) {
-    throw new Error("COSMOS_CONNECTION_STRING is not configured.");
-  }
-
-  const client = new CosmosClient(connectionString);
-  container = client.database(databaseId).container(containerId);
-
-  return container;
-}
-
-function withoutPassword(student) {
-  const publicStudent = { ...student };
-  delete publicStudent.password;
-  return publicStudent;
-}
+const { publicUser, users } = require("../shared/data");
 
 app.http("login", {
   methods: ["POST"],
   authLevel: "anonymous",
-  handler: async (request, context) => {
+  handler: async (request) => {
     let body;
 
     try {
@@ -44,48 +16,31 @@ app.http("login", {
       };
     }
 
-    const studentId = String(body?.studentId || "").trim();
+    const username = String(body?.username || "").trim();
     const password = String(body?.password || "");
 
-    if (!studentId || !password) {
+    if (!username || !password) {
       return {
         status: 400,
-        jsonBody: { message: "studentId and password are required." },
+        jsonBody: { message: "username and password are required." },
       };
     }
 
-    try {
-      const { resources } = await getStudentsContainer()
-        .items.query(
-          {
-            query: "SELECT * FROM c WHERE c.studentId = @studentId",
-            parameters: [{ name: "@studentId", value: studentId }],
-          },
-          { partitionKey: studentId }
-        )
-        .fetchAll();
+    const student = users.find(
+      (user) => user.username?.toLowerCase() === username.toLowerCase() && user.password === password
+    );
 
-      const student = resources[0];
-
-      if (!student || student.password !== password) {
-        return {
-          status: 401,
-          jsonBody: { message: "Student ID or password is incorrect." },
-        };
-      }
-
+    if (!student) {
       return {
-        jsonBody: {
-          student: withoutPassword(student),
-        },
-      };
-    } catch (error) {
-      context.error(error);
-
-      return {
-        status: 500,
-        jsonBody: { message: "Login service is unavailable." },
+        status: 401,
+        jsonBody: { message: "Username or password is incorrect." },
       };
     }
+
+    return {
+      jsonBody: {
+        student: publicUser(student),
+      },
+    };
   },
 });

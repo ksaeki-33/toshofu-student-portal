@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "studentId": "TIU2026001",
+    "username": "Kohei Sakaki",
+    "name": "Kohei Sakaki",
+    "department": "Student Council",
+    "email": "kohei.sakaki@tiu.local",
+    "password": "0001"
+  },
+  {
+    "id": "2",
+    "studentId": "TIU2026002",
+    "username": "Ko saeki",
+    "name": "Ko saeki",
+    "department": "IT Department",
+    "email": "saeki@tiu.local",
+    "password": "0002"
+  },
+  {
+    "id": "3",
+    "studentId": "TIU2026003",
+    "username": "Soma Kakehi",
+    "name": "Soma Kakehi",
+    "department": "Student Affairs",
+    "email": "soma.kakehi@tiu.local",
+    "password": "0003"
+  },
+  {
+    "id": "4",
+    "studentId": "TIU2026004",
+    "username": "Yuto Nakamaru",
+    "name": "Yuto Nakamaru",
+    "department": "International Relations",
+    "email": "yuto.nakamaru@tiu.local",
+    "password": "0004"
+  },
+  {
+    "id": "5",
+    "studentId": "TIU2026005",
+    "username": "So Tomita",
+    "name": "So Tomita",
+    "department": "Academic Affairs",
+    "email": "so.tomita@tiu.local",
+    "password": "0005"
+  },
+  {
+    "id": "6",
+    "studentId": "TIU2026006",
+    "username": "Keisuke Miyazono",
+    "name": "Keisuke Miyazono",
+    "department": "Campus Services",
+    "email": "keisuke.miyazono@tiu.local",
+    "password": "0006"
+  },
+  {
+    "id": "7",
+    "studentId": "TIU2026007",
+    "username": "Masaya Shimizu",
+    "name": "Masaya Shimizu",
+    "department": "Data Science",
+    "email": "masaya.shimizu@tiu.local",
+    "password": "0007"
+  }
+]

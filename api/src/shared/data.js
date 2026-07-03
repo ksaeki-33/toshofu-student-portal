@@ -1,6 +1,7 @@
 const users = [
   {
     id: "TIU-2026-001",
+    username: "testuser",
     name: "Kohei Sakaki",
     password: "0001",
     role: "Chairperson",
@@ -227,6 +228,8 @@ function publicUser(user) {
 
   return {
     id: user.id,
+    studentId: user.id,
+    username: user.username,
     name: user.name,
     role: user.role,
     isAdmin: user.isAdmin,

@@ -8,9 +8,9 @@ const text = {
     portal: "Student Portal",
     officialPortal: "Official Student Portal",
     signIn: "Sign In",
-    studentId: "Student ID",
+    username: "User Name",
     password: "Password",
-    loginError: "Student ID or password is incorrect.",
+    loginError: "User name or password is incorrect.",
     logout: "Logout",
     dashboard: "Dashboard",
     notices: "Notices",
@@ -60,9 +60,9 @@ const text = {
     portal: "学生ポータル",
     officialPortal: "公式学生ポータル",
     signIn: "ログイン",
-    studentId: "学生番号",
+    username: "ユーザー名",
     password: "パスワード",
-    loginError: "学生番号またはパスワードが正しくありません。",
+    loginError: "ユーザー名またはパスワードが正しくありません。",
     logout: "ログアウト",
     dashboard: "ダッシュボード",
     notices: "通知",
@@ -215,10 +215,10 @@ function App() {
         </nav>
 
         <div className="sidebar-actions">
-          <button className="lang-button" onClick={() => setLang(lang === "en" ? "ja" : "en")}>
+          <button className="tiu-button tiu-button--secondary lang-button" onClick={() => setLang(lang === "en" ? "ja" : "en")}>
             {lang === "en" ? "日本語" : "English"}
           </button>
-          <button className="logout-button" onClick={() => setCurrentUser(null)}>
+          <button className="tiu-button logout-button" onClick={() => setCurrentUser(null)}>
             {text[lang].logout}
           </button>
         </div>
@@ -241,7 +241,7 @@ function App() {
 }
 
 function Login({ lang, setLang, setCurrentUser }) {
-  const [studentId, setStudentId] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -254,7 +254,7 @@ function Login({ lang, setLang, setCurrentUser }) {
     try {
       const result = await apiFetch("/login", {
         method: "POST",
-        body: JSON.stringify({ studentId, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       setCurrentUser(result.student);
@@ -267,14 +267,14 @@ function Login({ lang, setLang, setCurrentUser }) {
 
   return (
     <div className="login-page">
-      <form className="login-card" onSubmit={handleLogin}>
-        <button type="button" className="lang-switch" onClick={() => setLang(lang === "en" ? "ja" : "en")}>
+      <form className="tiu-card login-card" onSubmit={handleLogin}>
+        <button type="button" className="tiu-button tiu-button--secondary lang-switch" onClick={() => setLang(lang === "en" ? "ja" : "en")}>
           {lang === "en" ? "日本語" : "English"}
         </button>
 
-        <p className="gold-label">{text[lang].officialPortal}</p>
-        <h1 className="login-title">Toshofu International University</h1>
-        <p className="login-text">
+        <p className="tiu-eyebrow">{text[lang].officialPortal}</p>
+        <h1 className="tiu-heading login-title">Toshofu International University</h1>
+        <p className="tiu-lead login-text">
           {lang === "en"
             ? "Access advising, campus notices, assignments, schedules, and official academic records."
             : "履修相談、学内通知、課題、時間割、公式成績情報を確認できます。"}
@@ -282,9 +282,9 @@ function Login({ lang, setLang, setCurrentUser }) {
 
         <input
           className="input"
-          placeholder={text[lang].studentId}
-          value={studentId}
-          onChange={(event) => setStudentId(event.target.value)}
+          placeholder={text[lang].username}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           autoComplete="username"
         />
         <input
@@ -298,7 +298,7 @@ function Login({ lang, setLang, setCurrentUser }) {
 
         {error && <p className="error">{error}</p>}
 
-        <button className="primary-button" disabled={isSubmitting}>
+        <button className="tiu-button tiu-button--primary primary-button" disabled={isSubmitting}>
           {isSubmitting ? text[lang].loading : text[lang].signIn}
         </button>
       </form>
@@ -310,11 +310,11 @@ function PageHeader({ lang, user, title, subtitle }) {
   return (
     <header className="page-header">
       <div>
-        <p className="gold-label">{text[lang].welcome}</p>
-        <h1 className="page-title">{title}</h1>
-        <p className="page-subtitle">{subtitle}</p>
+        <p className="tiu-eyebrow">{text[lang].welcome}</p>
+        <h1 className="tiu-heading page-title">{title}</h1>
+        <p className="tiu-lead page-subtitle">{subtitle}</p>
       </div>
-      <div className="profile-card">
+      <div className="tiu-card profile-card">
         <strong>{user.name}</strong>
         <span>{user.studentId}</span>
         {user.department && <span>{user.department}</span>}
@@ -449,7 +449,7 @@ function Grades({ lang, user, grades }) {
 
 function Stat({ title, value, text: description }) {
   return (
-    <div className="stat-card">
+    <div className="tiu-card stat-card">
       <p>{title}</p>
       <h2>{value}</h2>
       <span>{description}</span>
@@ -459,7 +459,7 @@ function Stat({ title, value, text: description }) {
 
 function Panel({ title, children }) {
   return (
-    <section className="panel">
+    <section className="tiu-card panel">
       <h2>{title}</h2>
       {children}
     </section>
@@ -511,7 +511,7 @@ function ClassItem({ classMeeting }) {
 
 function Table({ headers, rows, lang }) {
   return (
-    <div className="table-card">
+    <div className="tiu-card table-card">
       <table>
         <thead>
           <tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr>
