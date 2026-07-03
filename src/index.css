@@ -1,4 +1,78 @@
-@import "../tiu-design-system/tokens/theme.css";
+:root {
+  color-scheme: light;
+
+  --tiu-color-primary-blue: #0a3d91;
+  --tiu-color-deep-navy: #062b63;
+  --tiu-color-accent-gold: #c9a227;
+  --tiu-color-white: #ffffff;
+  --tiu-color-background: #f7f9fc;
+  --tiu-color-text: #1f2937;
+  --tiu-color-border: #d9e2ec;
+  --tiu-color-success: #16a34a;
+  --tiu-color-warning: #f59e0b;
+  --tiu-color-error: #dc2626;
+  --tiu-color-primary: var(--tiu-color-primary-blue);
+  --tiu-color-navy: var(--tiu-color-deep-navy);
+  --tiu-color-gold: var(--tiu-color-accent-gold);
+  --tiu-color-surface: var(--tiu-color-white);
+  --tiu-color-muted: #64748b;
+  --tiu-color-text-on-dark: var(--tiu-color-white);
+  --tiu-color-focus: #7aa7ff;
+  --tiu-color-primary-hover: #073376;
+  --tiu-color-gold-hover: #b6901f;
+
+  --tiu-space-1: 4px;
+  --tiu-space-2: 8px;
+  --tiu-space-3: 12px;
+  --tiu-space-4: 16px;
+  --tiu-space-5: 24px;
+  --tiu-space-6: 32px;
+  --tiu-space-7: 48px;
+  --tiu-space-8: 64px;
+
+  --tiu-radius-sm: 4px;
+  --tiu-radius-md: 8px;
+  --tiu-radius-lg: 12px;
+  --tiu-radius-button: 12px;
+  --tiu-radius-card: 16px;
+  --tiu-button-height: 48px;
+  --tiu-card-padding: 24px;
+  --tiu-container-width: 1120px;
+
+  --tiu-font-family-jp: "Noto Sans JP", system-ui, sans-serif;
+  --tiu-font-family-en: "Inter", system-ui, sans-serif;
+  --tiu-font-family-base: "Inter", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --tiu-font-size-xs: 0.75rem;
+  --tiu-font-size-sm: 0.875rem;
+  --tiu-font-size-md: 1rem;
+  --tiu-font-size-lg: 1.125rem;
+  --tiu-font-size-xl: 1.5rem;
+  --tiu-font-size-2xl: 2rem;
+  --tiu-font-size-3xl: 2.5rem;
+  --tiu-line-height-tight: 1.35;
+  --tiu-line-height-base: 1.7;
+  --tiu-font-weight-regular: 400;
+  --tiu-font-weight-medium: 500;
+  --tiu-font-weight-semibold: 600;
+  --tiu-font-weight-bold: 700;
+
+  --tiu-shadow-button: 0 8px 18px rgb(10 61 145 / 14%);
+  --tiu-shadow-card: 0 14px 36px rgb(6 43 99 / 8%);
+  --tiu-shadow-card-hover: 0 18px 44px rgb(6 43 99 / 12%);
+  --tiu-motion-fast: 160ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--tiu-font-family-base);
+  color: var(--tiu-color-text);
+  background: var(--tiu-color-background);
+  line-height: var(--tiu-line-height-base);
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   margin: 0;
@@ -9,4 +83,115 @@ body {
 #root {
   width: 100%;
   min-height: 100svh;
+}
+
+a {
+  color: var(--tiu-color-primary-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--tiu-color-focus);
+  outline-offset: 2px;
+}
+
+.tiu-eyebrow {
+  margin: 0 0 var(--tiu-space-2);
+  color: var(--tiu-color-accent-gold);
+  font-size: var(--tiu-font-size-sm);
+  font-weight: var(--tiu-font-weight-bold);
+  letter-spacing: 0;
+}
+
+.tiu-heading {
+  margin: 0;
+  color: var(--tiu-color-deep-navy);
+  font-size: var(--tiu-font-size-2xl);
+  font-weight: var(--tiu-font-weight-bold);
+  line-height: var(--tiu-line-height-tight);
+}
+
+.tiu-lead {
+  margin: var(--tiu-space-3) 0 0;
+  color: var(--tiu-color-muted);
+  font-size: var(--tiu-font-size-md);
+}
+
+.tiu-button {
+  display: inline-flex;
+  min-height: var(--tiu-button-height);
+  align-items: center;
+  justify-content: center;
+  gap: var(--tiu-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--tiu-radius-button);
+  padding: 0 var(--tiu-space-5);
+  font-weight: var(--tiu-font-weight-semibold);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--tiu-motion-fast), box-shadow var(--tiu-motion-fast), background-color var(--tiu-motion-fast), border-color var(--tiu-motion-fast);
+}
+
+.tiu-button:hover {
+  transform: translateY(-2px);
+}
+
+.tiu-button--primary {
+  background: var(--tiu-color-primary-blue);
+  color: var(--tiu-color-white);
+  box-shadow: var(--tiu-shadow-button);
+}
+
+.tiu-button--primary:hover {
+  background: var(--tiu-color-primary-hover);
+  box-shadow: 0 12px 24px rgb(10 61 145 / 18%);
+}
+
+.tiu-button--secondary {
+  background: var(--tiu-color-white);
+  border-color: var(--tiu-color-primary-blue);
+  color: var(--tiu-color-primary-blue);
+}
+
+.tiu-button--secondary:hover {
+  background: #f4f8ff;
+}
+
+.tiu-card {
+  border: 1px solid var(--tiu-color-border);
+  border-radius: var(--tiu-radius-card);
+  background: var(--tiu-color-white);
+  box-shadow: var(--tiu-shadow-card);
+  transition: transform var(--tiu-motion-fast), box-shadow var(--tiu-motion-fast), border-color var(--tiu-motion-fast);
+}
+
+.tiu-card:hover {
+  border-color: #cbd8e6;
+  box-shadow: var(--tiu-shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 640px) {
+  .tiu-heading {
+    font-size: var(--tiu-font-size-xl);
+  }
+
+  .tiu-button {
+    width: 100%;
+  }
 }
